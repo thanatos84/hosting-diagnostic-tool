@@ -31,8 +31,6 @@ package-lock.json
 hosting-report-*.json
 hosting-report-*.txt
 
-# User assets (screenshots, tutorials, manuals)
-assets/
 
 # Temp fix/audit scripts (generated during dev sessions)
 _fix*.js
