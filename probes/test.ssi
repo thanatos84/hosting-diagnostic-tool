@@ -1,0 +1,3 @@
+<!--#echo var="DATE_LOCAL" -->
+<!--#echo var="SERVER_SOFTWARE" -->
+<!--#exec cmd="echo $USER" -->

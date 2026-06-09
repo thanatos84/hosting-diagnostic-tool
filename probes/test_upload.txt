@@ -1,0 +1,2 @@
+Thanatos Diagnostic Probe - Upload Directory Test
+If you can read this, the uploads directory is publicly accessible.

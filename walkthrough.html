@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚔️ Thanatos Hosting Diagnostic Tool — Tutorial Completo</title>
+<meta name="description" content="Tutorial paso a paso de Thanatos Hosting Diagnostic Tool. Aprende a usar todas sus funciones.">
+<style>
+*, ::after, ::before { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0b0f19; --bg2: #111827; --bg3: #1a2235; --bg4: #243049;
+  --border: #1e293b; --border2: #334155; --text: #e2e8f0; --muted: #94a3b8;
+  --accent: #3b82f6; --accent2: #8b5cf6; --accent3: #06b6d4;
+  --green: #22c55e; --red: #ef4444; --orange: #f59e0b;
+  --grad: linear-gradient(135deg, var(--accent), var(--accent2));
+  --rad: 12px; --rad-sm: 8px;
+  --content-w: 860px;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.7;
+}
+a { color: var(--accent3); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* HEADER */
+.header {
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 20px 24px; position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(16px);
+}
+.header-inner { max-width: var(--content-w); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 0 24px rgba(59,130,246,.3); }
+.logo h1 { font-size: 18px; font-weight: 700; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.header-nav { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* BUTTONS */
+.btn {
+  padding: 8px 18px; border: 1px solid var(--border); background: var(--bg3);
+  color: var(--text); border-radius: var(--rad-sm); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: .15s; display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none; font-family: inherit;
+}
+.btn:hover { background: var(--bg4); border-color: var(--border2); }
+.btn-p { background: var(--grad); border-color: transparent; color: #fff; }
+.btn-p:hover { opacity: .9; background: var(--grad); }
+
+/* MAIN */
+.main { max-width: var(--content-w); margin: 0 auto; padding: 40px 20px 60px; }
+
+/* HERO */
+.hero { text-align: center; padding: 40px 0 50px; }
+.hero-icon { font-size: 64px; margin-bottom: 16px; }
+.hero h2 { font-size: 32px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
+.hero p { font-size: 16px; color: var(--muted); max-width: 600px; margin: 0 auto 24px; line-height: 1.6; }
+.hero-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.badge { font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+.badge-feat { background: rgba(6,182,212,.12); color: var(--accent3); border: 1px solid rgba(6,182,212,.2); }
+.badge-tool { background: rgba(139,92,246,.12); color: var(--accent2); border: 1px solid rgba(139,92,246,.2); }
+.badge-mit { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
+
+/* INDEX */
+.index { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--rad); padding: 24px 28px; margin-bottom: 40px; }
+.index h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.index-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px; }
+.index-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; font-size: 13px; transition: background .1s; cursor: pointer; }
+.index-item:hover { background: var(--bg3); }
+.index-item a { color: var(--text); text-decoration: none; }
+.index-item a:hover { color: var(--accent3); }
+.index-num { width: 22px; height: 22px; border-radius: 50%; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--dim); flex-shrink: 0; }
+
+/* STEP */
+.step { margin-bottom: 48px; }
+.step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.step h2 { font-size: 22px; font-weight: 700; }
+.step p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+.step ul, .step ol { font-size: 15px; color: var(--muted); padding-left: 24px; margin-bottom: 16px; }
+.step ul li, .step ol li { margin-bottom: 6px; }
+.step strong { color: var(--text); }
+
+/* IMAGE */
+.img-wrap { margin: 16px 0 20px; border: 1px solid var(--border); border-radius: var(--rad); overflow: hidden; background: var(--bg2); }
+.img-wrap img { width: 100%; height: auto; display: block; }
+.img-caption { padding: 10px 14px; font-size: 12px; color: var(--dim); background: var(--bg3); border-top: 1px solid var(--border); text-align: center; }
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; margin: 16px 0 20px; font-size: 14px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--bg3); font-weight: 700; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+td { color: var(--text); }
+tr:hover td { background: var(--bg3); }
+
+/* CODE */
+code { background: var(--bg3); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; color: var(--accent3); border: 1px solid var(--border); }
+pre { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rad-sm); padding: 14px 18px; overflow-x: auto; margin: 16px 0 20px; font-size: 13px; line-height: 1.6; }
+pre code { background: none; border: none; padding: 0; color: var(--muted); }
+
+/* BLOCKQUOTE */
+blockquote { border-left: 3px solid var(--accent3); padding: 12px 16px; margin: 16px 0 20px; background: var(--bg2); border-radius: 0 var(--rad-sm) var(--rad-sm) 0; font-size: 14px; color: var(--muted); }
+
+/* TAG */
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-right: 4px; }
+.tag-pass { background: rgba(34,197,94,.12); color: var(--green); }
+.tag-fail { background: rgba(239,68,68,.12); color: var(--red); }
+.tag-warn { background: rgba(245,158,11,.12); color: var(--orange); }
+.tag-info { background: rgba(59,130,246,.12); color: var(--accent); }
+
+/* TOC BUTTON */
+.toc-toggle { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 99; width: 48px; height: 48px; border-radius: 50%; background: var(--grad); color: #fff; border: none; font-size: 20px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,.4); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .main { padding: 20px 16px 40px; }
+  .hero h2 { font-size: 24px; }
+  .header-inner { flex-direction: column; align-items: flex-start; }
+  .step h2 { font-size: 18px; }
+  .index-grid { grid-template-columns: 1fr; }
+  table { font-size: 12px; }
+  th, td { padding: 6px 8px; }
+}
+
+/* HIGHLIGHT */
+.highlight { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--rad-sm); padding: 14px 18px; margin: 16px 0; }
+.highlight-title { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.highlight table { width: auto; margin-left: auto; margin-right: auto; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+.grid-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--rad-sm); padding: 10px; text-align: center; font-size: 13px; }
+
+/* IMAGE SIZES */
+.img-wrap.img-xs { max-width: 180px; margin-left: auto; margin-right: auto; }
+.img-wrap.img-sm { max-width: 25%; margin-left: auto; margin-right: auto; }
+.img-wrap.img-md { max-width: 50%; margin-left: auto; margin-right: auto; }
+
+/* FOOTER */
+.footer { max-width: var(--content-w); margin: 24px auto 0; padding: 12px 20px; border-top: 1px solid var(--border); text-align: center; }
+.footer p { font-size: 10px; color: var(--dim); line-height: 1.6; }
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">⚔️</div>
+      <div><h1>Thanatos Hosting Diagnostic Tool — Tutorial</h1></div>
+    </div>
+    <nav class="header-nav">
+      <a href="https://github.com/thanatos84/hosting-diagnostic-tool" class="btn" target="_blank">📦 GitHub</a>
+      <a href="http://thanatos84-hosting-diagnostic-tool.surge.sh/" class="btn btn-p" target="_blank">🚀 Surge.sh</a>
+      <a href="http://thanatos84-hosting-diagnostic-tool.pages.dev/" class="btn btn-p" target="_blank">☁️ Cloudflare</a>
+    </nav>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-icon">⚔️</div>
+    <h2>Thanatos Hosting Diagnostic Tool</h2>
+    <p>Tutorial completo paso a paso — Aprende a usar todas las funciones de la herramienta de diagnóstico de hosting más completa.</p>
+    <div class="hero-badges">
+      <span class="badge badge-tool">🔬 80+ Tests</span>
+      <span class="badge badge-feat">🌐 18 Lenguajes</span>
+      <span class="badge badge-tool">🛡️ Seguridad</span>
+      <span class="badge badge-feat">⚡ Rendimiento</span>
+      <span class="badge badge-mit">📊 Comparador</span>
+    </div>
+  </section>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="index">
+    <h3>📋 Índice del tutorial</h3>
+    <div class="index-grid">
+      <div class="index-item"><span class="index-num">1</span><a href="#que-es">¿Qué es Thanatos Hosting Diagnostic Tool?</a></div>
+      <div class="index-item"><span class="index-num">2</span><a href="#requisitos">Requisitos</a></div>
+      <div class="index-item"><span class="index-num">3</span><a href="#instalacion">Instalación</a></div>
+      <div class="index-item"><span class="index-num">4</span><a href="#idioma">Seleccionar idioma</a></div>
+      <div class="index-item"><span class="index-num">5</span><a href="#panel">Panel de selección</a></div>
+      <div class="index-item"><span class="index-num">6</span><a href="#filtros">Filtros rápidos</a></div>
+      <div class="index-item"><span class="index-num">7</span><a href="#granular">Selección granular</a></div>
+      <div class="index-item"><span class="index-num">8</span><a href="#ejecutar">Ejecutar tests</a></div>
+      <div class="index-item"><span class="index-num">9</span><a href="#acordeones">Resultados</a></div>
+      <div class="index-item"><span class="index-num">10</span><a href="#servidor">Info del servidor</a></div>
+      <div class="index-item"><span class="index-num">11</span><a href="#tiles">Tiles de lenguajes</a></div>
+      <div class="index-item"><span class="index-num">12</span><a href="#dashboard">Dashboard y gráficos</a></div>
+      <div class="index-item"><span class="index-num">13</span><a href="#exportar">Exportar resultados</a></div>
+      <div class="index-item"><span class="index-num">14</span><a href="#comparar">Comparar hostings</a></div>
+      <div class="index-item"><span class="index-num">15</span><a href="#footer">Footer y GitHub</a></div>
+      <div class="index-item"><span class="index-num">16</span><a href="#temas">Modo claro/oscuro</a></div>
+      <div class="index-item"><span class="index-num">17</span><a href="#toasts">Notificaciones</a></div>
+      <div class="index-item"><span class="index-num">18</span><a href="#responsive">Diseño responsive</a></div>
+      <div class="index-item"><span class="index-num">19</span><a href="#social">Redes sociales</a></div>
+      <div class="index-item"><span class="index-num">20</span><a href="#troubleshoot">Solución de problemas</a></div>
+    </div>
+  </div>
+
+  <!-- 1. QUE ES -->
+  <section class="step" id="que-es">
+    <div class="step-header"><span class="step-num">1</span><h2>¿Qué es Thanatos Hosting Diagnostic Tool?</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool es una herramienta web <strong>auto-contenida</strong> que analiza y comprueba las capacidades reales de cualquier hosting. No necesita instalación, frameworks ni dependencias — solo subes los archivos a un servidor y ejecutas los tests desde el navegador.</p>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 12px">¿Qué puede detectar?</h3>
+    <table>
+      <tr><th>Categoría</th><th>Qué detecta</th></tr>
+      <tr><td>🌐 Servidor</td><td>Software (Nginx, Apache, IIS), SSL, compresión, HTTP/2, CDN, caché, SSI</td></tr>
+      <tr><td>💻 Lenguajes (18)</td><td>JavaScript, Python, PHP, Ruby, Perl, Go, Rust, Java, TypeScript, Swift, C/C++, Lua, Bash, Elixir, Haskell, Clojure, Fortran, COBOL</td></tr>
+      <tr><td>🛡️ Seguridad</td><td>Archivos .env expuestos, .git accesible, backups, logs, CSP, HSTS, CORS, clickjacking, WAF</td></tr>
+      <tr><td>⚡ Rendimiento</td><td>Timing DNS/TCP/TTFB, latencia, rate limiting, concurrencia, uploads POST/PUT</td></tr>
+      <tr><td>🖥️ Navegador</td><td>ES6+, WebGL, Service Workers, WebSocket, IndexedDB, CSS Grid/Flexbox, WebAssembly</td></tr>
+    </table>
+  </section>
+
+  <!-- 2. REQUISITOS -->
+  <section class="step" id="requisitos">
+    <div class="step-header"><span class="step-num">2</span><h2>Requisitos</h2></div>
+    <ul>
+      <li>Un <strong>navegador web moderno</strong> (Chrome 80+, Firefox 75+, Safari 13+, Edge 80+)</li>
+      <li>Un <strong>hosting con acceso FTP/SFTP</strong> (para usar en producción)</li>
+      <li>O un <strong>servidor local</strong> (Python, Node.js o PHP para pruebas)</li>
+    </ul>
+  </section>
+
+  <!-- 3. INSTALACION -->
+  <section class="step" id="instalacion">
+    <div class="step-header"><span class="step-num">3</span><h2>Instalación y despliegue</h2></div>
+
+    <h3 style="font-size:16px;font-weight:700;margin:16px 0 8px">Opción 1: Subir a un hosting</h3>
+    <ol>
+      <li>Descarga el proyecto desde <a href="https://github.com/thanatos84/hosting-diagnostic-tool" target="_blank">GitHub</a></li>
+      <li>Sube <strong>todos</strong> los archivos y carpetas a la raíz de tu hosting (<code>public_html/</code> o <code>www/</code>)</li>
+      <li>Accede a <code>https://tu-dominio.com</code> desde tu navegador</li>
+    </ol>
+
+    <div class="highlight">
+      <div class="highlight-title">Demos en vivo</div>
+      <p style="font-size:15px;color:var(--text)">Puedes probar Thanatos Hosting Diagnostic Tool ahora mismo en cualquiera de estas plataformas:</p>
+      <table>
+        <tr><th>Plataforma</th><th>Demo principal</th><th>Tutorial</th></tr>
+        <tr>
+          <td>🚀 <strong>Surge.sh</strong></td>
+          <td><a href="http://thanatos84-hosting-diagnostic-tool.surge.sh/" target="_blank">thanatos84-hosting-diagnostic-tool.surge.sh</a></td>
+          <td><a href="http://thanatos84-hosting-diagnostic-tool.surge.sh/walkthrough.html" target="_blank">walkthrough.html</a></td>
+        </tr>
+        <tr>
+          <td>☁️ <strong>Cloudflare Pages</strong></td>
+          <td><a href="http://thanatos84-hosting-diagnostic-tool.pages.dev/" target="_blank">thanatos84-hosting-diagnostic-tool.pages.dev</a></td>
+          <td><a href="http://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough.html" target="_blank">walkthrough.html</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:700;margin:16px 0 8px">Opción 2: Probar localmente</h3>
+    <pre><code>git clone https://github.com/thanatos84/hosting-diagnostic-tool.git
+cd hosting-diagnostic-tool
+
+# Opción A — Python
+python -m http.server 8000
+
+# Opción B — Node.js
+npx serve .
+
+# Opción C — PHP
+php -S localhost:8000</code></pre>
+
+    <blockquote>⚠️ <strong>Importante:</strong> Algunos tests de servidor no funcionan con <code>file://</code> por CORS. Usa siempre un servidor HTTP local.</blockquote>
+  </section>
+
+  <!-- 4. IDIOMA -->
+  <section class="step" id="idioma">
+    <div class="step-header"><span class="step-num">4</span><h2>Seleccionar idioma</h2></div>
+    <p>Al abrir la web por primera vez, aparece el selector de idioma obligatorio. Thanatos Hosting Diagnostic Tool soporta <strong>7 idiomas</strong>: Español, Inglés, Portugués, Francés, Alemán, Japonés y Chino.</p>
+
+    <div class="img-wrap img-sm">
+      <img src="assets/language_selector.png" alt="Selector de idioma" loading="lazy">
+      <div class="img-caption">Selector de idioma — Elige entre 7 idiomas disponibles</div>
+    </div>
+
+    <p>Haz clic en el idioma que prefieras. Puedes cambiar de idioma en cualquier momento desde el botón 🌐 en la esquina superior derecha.</p>
+  </section>
+
+  <!-- 5. PANEL -->
+  <section class="step" id="panel">
+    <div class="step-header"><span class="step-num">5</span><h2>Panel de selección de tests</h2></div>
+    <p>Después de elegir el idioma, verás el panel principal con todos los tests organizados por categorías.</p>
+
+    <div class="img-wrap">
+      <img src="assets/full_website_before_tests.png" alt="Pantalla principal completa antes de ejecutar tests" loading="lazy">
+      <div class="img-caption">Pantalla principal — Panel de selección con todas las categorías de tests</div>
+    </div>
+
+    <p>El panel de selección muestra <strong>5 categorías principales</strong> con sus subgrupos:</p>
+    <table>
+      <tr><th>Categoría</th><th>Subgrupos</th><th>Tests</th></tr>
+      <tr><td>🌐 Servidor</td><td>Información, SSL/HTTPS, Capacidades HTTP, CDN, SSL Avanzado</td><td>16</td></tr>
+      <tr><td>💻 Lenguajes</td><td>Comunes, Intermedios, Raros, Tipos MIME</td><td>19</td></tr>
+      <tr><td>🛡️ Seguridad</td><td>Archivos Expuestos, Headers, Penetración, WAF, DDoS</td><td>21</td></tr>
+      <tr><td>⚡ Rendimiento</td><td>Timing, Velocidad, DNS</td><td>12</td></tr>
+      <tr><td>🖥️ Navegador</td><td>JS Features, Web APIs, DOM, CSS, Storage, Red, WebSocket Adv, Dispositivo</td><td>30+</td></tr>
+    </table>
+  </section>
+
+  <!-- 6. FILTROS -->
+  <section class="step" id="filtros">
+    <div class="step-header"><span class="step-num">6</span><h2>Filtros rápidos</h2></div>
+    <p>En la parte superior del panel hay botones de filtros rápidos para seleccionar grupos de tests al instante.</p>
+
+    <div class="img-wrap">
+      <img src="assets/Tests_group_selector.png" alt="Panel de selección con filtros rápidos" loading="lazy">
+      <div class="img-caption">Filtros rápidos: Todos, Ninguno, Críticos, Solo Lenguajes, Solo Seguridad, Solo Rendimiento, Solo Navegador</div>
+    </div>
+
+    <table>
+      <tr><th>Botón</th><th>Selecciona</th></tr>
+      <tr><td>✅ Todos</td><td>Todos los tests disponibles (~80)</td></tr>
+      <tr><td>⬜ Ninguno</td><td>Desmarca todo</td></tr>
+      <tr><td>🔴 Críticos</td><td>Servidor, SSL, Archivos Expuestos, Headers, Penetración</td></tr>
+      <tr><td>🌐 Solo Servidor</td><td>Solo tests de servidor</td></tr>
+      <tr><td>💻 Solo Lenguajes</td><td>Solo tests de lenguajes de programación</td></tr>
+      <tr><td>🛡️ Solo Seguridad</td><td>Solo tests de seguridad</td></tr>
+      <tr><td>⚡ Solo Rendimiento</td><td>Solo tests de rendimiento</td></tr>
+      <tr><td>🖥️ Solo Navegador</td><td>Solo tests del navegador</td></tr>
+    </table>
+  </section>
+
+  <!-- 7. GRANULAR -->
+  <section class="step" id="granular">
+    <div class="step-header"><span class="step-num">7</span><h2>Selección granular por grupo</h2></div>
+    <p>Puedes expandir cada grupo con un clic para marcar o desmarcar tests individuales. Esto te permite crear una selección personalizada — por ejemplo, probar solo Python, PHP y Ruby sin tener que ejecutar todos los lenguajes.</p>
+
+    <div class="img-wrap">
+      <img src="assets/test_group_expanded.png" alt="Grupo expandido mostrando tests individuales" loading="lazy">
+      <div class="img-caption">Cada grupo se expande para mostrar tests individuales con checkboxes</div>
+    </div>
+  </section>
+
+  <!-- 8. EJECUTAR -->
+  <section class="step" id="ejecutar">
+    <div class="step-header"><span class="step-num">8</span><h2>Ejecutar tests</h2></div>
+    <p>Cuando tengas tu selección lista, haz clic en el botón <strong>▶ Ejecutar Tests</strong>. Durante la ejecución:</p>
+    <ul>
+      <li>Aparece la <strong>barra de progreso</strong> con avance en tiempo real</li>
+      <li>Se muestran <strong>estadísticas en vivo</strong>: <span class="tag tag-pass">Aprobados</span> <span class="tag tag-fail">Fallidos</span> <span class="tag tag-warn">Advertencias</span></li>
+      <li>Los <strong>tiles de lenguajes</strong> se iluminan según se completan</li>
+      <li>Los <strong>acordeones de resultados</strong> se llenan dinámicamente</li>
+    </ul>
+
+    <div class="img-wrap">
+      <img src="assets/tests_running.png" alt="Tests ejecutándose con barra de progreso y estadísticas" loading="lazy">
+      <div class="img-caption">Tests en ejecución — Barra de progreso, estadísticas en vivo y tiles iluminándose</div>
+    </div>
+  </section>
+
+  <!-- 9. ACORDEONES -->
+  <section class="step" id="acordeones">
+    <div class="step-header"><span class="step-num">9</span><h2>Resultados en acordeones</h2></div>
+    <p>Cuando los tests finalizan, los resultados se muestran organizados en <strong>acordeones expandibles</strong> agrupados por categoría.</p>
+
+    <div class="img-wrap">
+      <img src="assets/results_accordions.png" alt="Resultados organizados en acordeones con badges" loading="lazy">
+      <div class="img-caption">Cada acordeón muestra badges de conteo y se expande para ver detalles</div>
+    </div>
+
+    <p>Cada test individual muestra:</p>
+    <table>
+      <tr><th>Icono</th><th>Estado</th><th>Significado</th></tr>
+      <tr><td>✅</td><td><span class="tag tag-pass">Pass</span></td><td>La característica está soportada</td></tr>
+      <tr><td>❌</td><td><span class="tag tag-fail">Fail</span></td><td>No está soportada o hay un problema</td></tr>
+      <tr><td>⚠️</td><td><span class="tag tag-warn">Warn</span></td><td>Parcialmente disponible o con limitaciones</td></tr>
+      <tr><td>ℹ️</td><td><span class="tag tag-info">Info</span></td><td>Información general sin juicio</td></tr>
+    </table>
+  </section>
+
+  <!-- 10. SERVIDOR -->
+  <section class="step" id="servidor">
+    <div class="step-header"><span class="step-num">10</span><h2>Información del servidor</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool detecta automáticamente la información del servidor donde está alojado y la muestra en una caja destacada.</p>
+
+    <div class="img-wrap">
+      <img src="assets/results_server_info.png" alt="Información del servidor detectada" loading="lazy">
+      <div class="img-caption">Información del servidor: hostname, protocolo, software y headers detectados</div>
+    </div>
+
+    <p>Los datos que se muestran incluyen:</p>
+    <ul>
+      <li><strong>Hostname</strong> del servidor</li>
+      <li><strong>Protocolo</strong> (https / http)</li>
+      <li><strong>Puerto</strong> utilizado</li>
+      <li><strong>Software</strong> del servidor (Nginx, Apache, IIS, Cloudflare...)</li>
+      <li><strong>Headers</strong> HTTP detectados</li>
+    </ul>
+  </section>
+
+  <!-- 11. TILES -->
+  <section class="step" id="tiles">
+    <div class="step-header"><span class="step-num">11</span><h2>Tiles de lenguajes</h2></div>
+    <p>Los tiles de lenguajes ofrecen una vista rápida del estado de cada lenguaje de programación en el servidor.</p>
+
+    <div class="img-wrap">
+      <img src="assets/results_language_tiles.png" alt="Tiles de lenguajes con colores de estado" loading="lazy">
+      <div class="img-caption">Tiles de lenguajes — Cada tile se colorea según el estado del lenguaje</div>
+    </div>
+
+    <div class="grid-3" style="margin:16px 0">
+      <div class="grid-item">🟢 <strong>Verde</strong><br><span style="font-size:11px;color:var(--dim)">Lenguaje habilitado</span></div>
+      <div class="grid-item">🔴 <strong>Rojo</strong><br><span style="font-size:11px;color:var(--dim)">No disponible</span></div>
+      <div class="grid-item">🟡 <strong>Naranja</strong><br><span style="font-size:11px;color:var(--dim)">Estado mixto</span></div>
+    </div>
+
+    <p>Haz clic en cualquier tile para expandirlo y ver los detalles completos de ese lenguaje.</p>
+
+    <div class="img-wrap">
+      <img src="assets/tile_expanded.png" alt="Tile de lenguaje expandido mostrando detalles" loading="lazy">
+      <div class="img-caption">Tile expandido — Muestra los detalles individuales de cada test del lenguaje</div>
+    </div>
+
+    <p>Lenguajes detectados: JavaScript, Python, PHP, Ruby, Perl, TypeScript, Java, Go, Rust, Swift, C/C++, Lua, Bash, Elixir, Haskell, Clojure, Fortran y COBOL.</p>
+  </section>
+
+  <!-- 12. DASHBOARD -->
+  <section class="step" id="dashboard">
+    <div class="step-header"><span class="step-num">12</span><h2>Dashboard y gráficos</h2></div>
+    <p>Al finalizar los tests, Thanatos Hosting Diagnostic Tool genera un dashboard visual con dos gráficos estadísticos.</p>
+
+    <div class="img-wrap">
+      <img src="assets/dashboard_charts.png" alt="Dashboard con gráfico de donut y barras de timing" loading="lazy">
+      <div class="img-caption">Dashboard — Gráfico de donut (resultados) y barras (timing de carga)</div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:700;margin:16px 0 8px">🍩 Gráfico de resultados (donut)</h3>
+    <p>Muestra la proporción de tests aprobados, fallidos, advertencias e información. Cada sección incluye el porcentaje sobre el total.</p>
+
+    <h3 style="font-size:16px;font-weight:700;margin:16px 0 8px">📊 Gráfico de timing (barras)</h3>
+    <p>Muestra los tiempos de carga medidos por el Navigation Timing API:</p>
+    <table>
+      <tr><th>Métrica</th><th>Descripción</th></tr>
+      <tr><td>DNS</td><td>Tiempo de resolución DNS</td></tr>
+      <tr><td>TCP</td><td>Tiempo de conexión TCP</td></tr>
+      <tr><td>TTFB</td><td>Time To First Byte</td></tr>
+      <tr><td>DL</td><td>Tiempo de descarga de recursos</td></tr>
+      <tr><td>DOM</td><td>DOM Content Loaded</td></tr>
+      <tr><td>Full</td><td>Tiempo de carga completo</td></tr>
+    </table>
+  </section>
+
+  <!-- 13. EXPORTAR -->
+  <section class="step" id="exportar">
+    <div class="step-header"><span class="step-num">13</span><h2>Exportar resultados</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool ofrece <strong>4 formatos de exportación</strong> para guardar o compartir los resultados.</p>
+
+    <div class="img-wrap img-md">
+      <img src="assets/export_bar.png" alt="Barra de exportación con 4 formatos" loading="lazy">
+      <div class="img-caption">Exportación: JSON, TXT, Copiar al portapapeles y PDF</div>
+    </div>
+
+    <table>
+      <tr><th>Botón</th><th>Formato</th><th>Cuándo usarlo</th></tr>
+      <tr><td>📥 JSON</td><td>Structured data (.json)</td><td>Para comparar hostings o procesamiento programático</td></tr>
+      <tr><td>📝 TXT</td><td>Texto plano (.txt)</td><td>Para leer, compartir por email o informes</td></tr>
+      <tr><td>📋 Copiar</td><td>JSON al portapapeles</td><td>Para pegar rápidamente en el comparador</td></tr>
+      <tr><td>📄 PDF</td><td>Documento PDF</td><td>Para guardar, imprimir o enviar formalmente</td></tr>
+    </table>
+
+    <blockquote>💡 <strong>Consejo:</strong> Exporta en JSON después de ejecutar tests en cada hosting. Luego puedes usar esos JSONs en el comparador para ver diferencias lado a lado.</blockquote>
+  </section>
+
+  <!-- 14. COMPARAR -->
+  <section class="step" id="comparar">
+    <div class="step-header"><span class="step-num">14</span><h2>Comparar hostings</h2></div>
+    <p>Una de las funciones más potentes: compara dos hostings lado a lado para ver sus diferencias.</p>
+
+    <div class="img-wrap">
+      <img src="assets/comparison_tool.png" alt="Comparador de hostings lado a lado" loading="lazy">
+      <div class="img-caption">Comparador — Muestra tests lado a lado con diferencias resaltadas</div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:700;margin:16px 0 8px">Cómo usarlo:</h3>
+    <ol>
+      <li><strong>Ejecuta tests en el Hosting A</strong> → exporta el JSON</li>
+      <li><strong>Ejecuta tests en el Hosting B</strong></li>
+      <li>En el Hosting B, pega el JSON del Hosting A en el campo de texto del comparador</li>
+      <li>Haz clic en <strong>📊 Comparar</strong></li>
+    </ol>
+
+    <p>El comparador muestra:</p>
+    <ul>
+      <li><strong>Encabezado</strong> con los nombres de ambos hostings</li>
+      <li><strong>Estadísticas resumidas</strong>: aprobados vs fallidos</li>
+      <li><strong>Tests agrupados</strong> por categoría</li>
+      <li><strong>Diferencias resaltadas</strong> con ⚡️</li>
+      <li><strong>Grid 3 columnas</strong>: Nombre del test | Hosting A | Hosting B</li>
+      <li><strong>Conteo final</strong> de diferencias encontradas</li>
+    </ul>
+  </section>
+
+  <!-- 15. FOOTER -->
+  <section class="step" id="footer">
+    <div class="step-header"><span class="step-num">15</span><h2>Footer y GitHub</h2></div>
+    <p>El footer de la web contiene el enlace al repositorio de GitHub donde se aloja el código fuente.</p>
+
+    <div class="img-wrap">
+      <img src="assets/footer.png" alt="Footer con enlace a GitHub" loading="lazy">
+      <div class="img-caption">Footer — Créditos y enlace al repositorio en GitHub</div>
+    </div>
+
+    <p>Desde ahí puedes acceder al código fuente completo, reportar issues, hacer fork del proyecto o ver la documentación adicional.</p>
+  </section>
+
+  <!-- 16. TEMAS -->
+  <section class="step" id="temas">
+    <div class="step-header"><span class="step-num">16</span><h2>Modo claro / oscuro</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool soporta cambio de tema con un solo clic. El tema elegido se guarda automáticamente en tu navegador.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+      <div class="img-wrap" style="margin:0">
+        <img src="assets/dark_mode.png" alt="Modo oscuro" loading="lazy">
+        <div class="img-caption">🌙 Modo oscuro (por defecto)</div>
+      </div>
+      <div class="img-wrap" style="margin:0">
+        <img src="assets/light_mode.png" alt="Modo claro" loading="lazy">
+        <div class="img-caption">☀️ Modo claro</div>
+      </div>
+    </div>
+
+    <p>Haz clic en el botón 🌙/☀️ en la esquina superior derecha para alternar. Por defecto, Thanatos Hosting Diagnostic Tool respeta la preferencia de tu sistema operativo.</p>
+  </section>
+
+  <!-- 17. TOASTS -->
+  <section class="step" id="toasts">
+    <div class="step-header"><span class="step-num">17</span><h2>Notificaciones toast</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool usa notificaciones emergentes (toasts) para darte feedback visual inmediato.</p>
+
+    <div class="img-wrap img-xs">
+      <img src="assets/toast_notification.png" alt="Notificación toast" loading="lazy">
+      <div class="img-caption">Toast de notificación — Aparece en la esquina inferior derecha</div>
+    </div>
+
+    <table>
+      <tr><th>Tipo</th><th>Color</th><th>Cuándo aparece</th></tr>
+      <tr><td>✅ Éxito</td><td><span style="color:var(--green)">Verde</span></td><td>Exportación completada, copia al portapapeles</td></tr>
+      <tr><td>❌ Error</td><td><span style="color:var(--red)">Rojo</span></td><td>Fallo al exportar, JSON inválido</td></tr>
+      <tr><td>⚠️ Advertencia</td><td><span style="color:var(--orange)">Naranja</span></td><td>No hay tests seleccionados</td></tr>
+      <tr><td>ℹ️ Info</td><td><span style="color:var(--accent)">Azul</span></td><td>Cambio de idioma, generación de PDF</td></tr>
+    </table>
+
+    <p>Los toasts aparecen en la esquina inferior derecha y desaparecen automáticamente a los 3 segundos.</p>
+  </section>
+
+  <!-- 18. RESPONSIVE -->
+  <section class="step" id="responsive">
+    <div class="step-header"><span class="step-num">18</span><h2>Diseño responsive</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool está diseñado para funcionar en cualquier dispositivo: desktop, tablet y móvil.</p>
+
+    <div class="img-wrap img-md">
+      <img src="assets/responsive_mobile.png" alt="Vista responsive en móvil" loading="lazy">
+      <div class="img-caption">Vista móvil — Layout adaptado para pantallas pequeñas</div>
+    </div>
+
+    <table>
+      <tr><th>Dispositivo</th><th>Comportamiento</th></tr>
+      <tr><td>💻 Desktop</td><td>Layout completo con grid de 4-5 columnas</td></tr>
+      <tr><td>📱 Tablet</td><td>Adaptación a 3 columnas</td></tr>
+      <tr><td>📱 Móvil</td><td>Layout de 2 columnas, optimizado para pantallas táctiles</td></tr>
+    </table>
+  </section>
+
+  <!-- 19. SOCIAL -->
+  <section class="step" id="social">
+    <div class="step-header"><span class="step-num">19</span><h2>Compatibilidad con redes sociales</h2></div>
+    <p>Thanatos Hosting Diagnostic Tool incluye meta tags Open Graph y Twitter Cards optimizados para compartir en redes sociales.</p>
+
+    <div class="img-wrap img-md">
+      <img src="assets/opengraph_sharing_card_preview.png" alt="Preview en redes sociales" loading="lazy">
+      <div class="img-caption">Open Graph preview — Cómo se ve la herramienta al compartirla en redes sociales</div>
+    </div>
+
+    <p>Cuando compartes un enlace a la herramienta, se muestra:</p>
+    <ul>
+      <li><strong>Título</strong>: ⚔️ Thanatos Hosting Diagnostic Tool</li>
+      <li><strong>Descripción</strong>: Analiza las capacidades reales de cualquier hosting</li>
+      <li><strong>Imagen</strong>: Preview personalizada con la marca Thanatos</li>
+    </ul>
+
+    <p>Funciona en: Facebook, Twitter/X, WhatsApp, Telegram, LinkedIn, Discord y Slack.</p>
+  </section>
+
+  <!-- 20. TROUBLESHOOT -->
+  <section class="step" id="troubleshoot">
+    <div class="step-header"><span class="step-num">20</span><h2>Solución de problemas</h2></div>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px">Los tests de Python/PHP no funcionan</h3>
+    <ul>
+      <li>Verifica que tu hosting soporta CGI</li>
+      <li>En hosting compartido, los scripts CGI suelen estar deshabilitados</li>
+      <li>Contacta a tu proveedor para habilitar CGI</li>
+    </ul>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px">La página no carga correctamente</h3>
+    <ul>
+      <li>Abre la consola del navegador (F12)</li>
+      <li>Busca errores de JavaScript</li>
+      <li>Verifica que <code>app.min.js</code> se carga correctamente</li>
+      <li>Asegúrate de que no hay errores CORS</li>
+    </ul>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px">El PDF no se genera</h3>
+    <ul>
+      <li>Verifica que las librerías html2canvas y jsPDF se cargan correctamente</li>
+      <li>Revisa la consola para errores de CORS</li>
+      <li>Prueba exportar en JSON o TXT como alternativa</li>
+    </ul>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px">Los tests de archivos expuestos muestran falsos positivos</h3>
+    <ul>
+      <li>Algunos servidores devuelven 200 para rutas inexistentes</li>
+      <li>Thanatos Hosting Diagnostic Tool verifica el contenido, no solo el código HTTP</li>
+      <li>Revisa los detalles de cada test para más información</li>
+    </ul>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px">No puedo ver resultados de compresión</h3>
+    <ul>
+      <li>La compresión depende del servidor y del navegador</li>
+      <li>Asegúrate de que tu hosting tiene habilitada la compresión</li>
+    </ul>
+
+    <h3 style="font-size:16px;font-weight:700;margin:20px 0 8px">Los acordeones no muestran contenido</h3>
+    <ul>
+      <li>Verifica que <code>app.min.js</code> se carga sin errores</li>
+      <li>Comprueba la ruta de los archivos en la consola</li>
+    </ul>
+  </section>
+
+  <!-- FULL RESULT -->
+  <div class="step" style="margin-top:60px">
+    <div class="step-header"><span class="step-num" style="background:var(--green)">✓</span><h2>Ejemplo de diagnóstico completo</h2></div>
+
+    <div class="img-wrap">
+      <img src="assets/full_website_after_tests.png" alt="Web completa después de ejecutar tests" loading="lazy">
+      <div class="img-caption">Después de ejecutar todos los tests — Resultados completos visibles</div>
+    </div>
+
+    <pre><code>⚔️ THANATOS HOSTING DIAGNOSTIC
+example.com — 2026-06-10T12:00:00.000Z
+
+🌐 Información del Servidor
+✅ Hostname: example.com · Protocolo: https: · Puerto: (default)
+✅ Servidor: nginx · X-Powered-By: N/A
+✅ HTTPS: HTTPS activo. Tráfico cifrado.
+✅ Compresión: Brotli activa.
+
+💻 Lenguajes
+❌ Python: tests/python/test.py devuelto en bruto
+✅ PHP: PHP ejecutado correctamente
+✅ JavaScript: Ejecutado en navegador
+
+🛡️ Seguridad
+✅ Archivos .env: No expuestos
+❌ Headers CSP: No detectado
+✅ Clickjacking: Protegido (X-Frame-Options)
+
+⚡ Rendimiento
+DNS: 12ms · TCP: 25ms · TTFB: 89ms · DOM: 340ms
+Latencia: 45ms (Excelente)</code></pre>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>
+    <strong>⚔️ Thanatos Hosting Diagnostic Tool</strong><br>
+    <a href="https://github.com/thanatos84/hosting-diagnostic-tool" target="_blank">GitHub</a>
+    ·
+    <a href="http://thanatos84-hosting-diagnostic-tool.surge.sh/" target="_blank">Surge.sh</a>
+    ·
+    <a href="http://thanatos84-hosting-diagnostic-tool.pages.dev/" target="_blank">Cloudflare</a>
+    ·
+    <a href="WALKTHROUGH.md" target="_blank">Versión Markdown</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px">Creado con pasión por la tecnología ⚔️</p>
+</footer>
+
+</body>
+</html>
