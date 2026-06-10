@@ -61,7 +61,6 @@ Puedes probar la herramienta sin instalar nada en cualquiera de estos enlaces:
 
 | Plataforma | URL Demo | URL Tutorial |
 |------------|----------|--------------|
-| 🚀 **Surge.sh** | [thanatos84-hosting-diagnostic-tool.surge.sh](http://thanatos84-hosting-diagnostic-tool.surge.sh/) | [walkthrough](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) |
 | ☁️ **Cloudflare Pages** | [thanatos84-hosting-diagnostic-tool.pages.dev](http://thanatos84-hosting-diagnostic-tool.pages.dev/) | [walkthrough](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) |
 
 ### Opción 2: Subir a un hosting (recomendado)
