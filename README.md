@@ -14,7 +14,7 @@
 
 [🚀 Surge.sh Demo](http://thanatos84-hosting-diagnostic-tool.surge.sh/) &nbsp;·&nbsp;
 [☁️ Cloudflare Demo](http://thanatos84-hosting-diagnostic-tool.pages.dev/) &nbsp;·&nbsp;
-[📖 Tutorial HTML](http://thanatos84-hosting-diagnostic-tool.surge.sh/walkthrough.html) &nbsp;·&nbsp;
+[📖 Tutorial HTML](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) &nbsp;·&nbsp;
 [🐛 Reportar bug](https://github.com/thanatos84/hosting-diagnostic-tool/issues)
 
 </div>
@@ -122,7 +122,7 @@ Elige la plataforma que prefieras:
 
 | Plataforma | Demo principal | Tutorial HTML |
 |------------|---------------|---------------|
-| 🚀 **Surge.sh** | [thanatos84-hosting-diagnostic-tool.surge.sh](http://thanatos84-hosting-diagnostic-tool.surge.sh/) | [walkthrough.html](http://thanatos84-hosting-diagnostic-tool.surge.sh/walkthrough.html) |
+| 🚀 **Surge.sh** | [thanatos84-hosting-diagnostic-tool.surge.sh](http://thanatos84-hosting-diagnostic-tool.surge.sh/) | [walkthrough.html](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) |
 | ☁️ **Cloudflare Pages** | [thanatos84-hosting-diagnostic-tool.pages.dev](http://thanatos84-hosting-diagnostic-tool.pages.dev/) | [walkthrough.html](http://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough.html) |
 
 ### Opción 2: Subir a tu hosting
@@ -308,8 +308,7 @@ Este proyecto está bajo la licencia MIT — ver el archivo [LICENSE](LICENSE) p
 | Recurso | Descripción |
 |---------|-------------|
 | [📖 WALKTHROUGH.md](WALKTHROUGH.md) | Tutorial paso a paso (Markdown) |
-| [🖥️ walkthrough.html](http://thanatos84-hosting-diagnostic-tool.surge.sh/walkthrough.html) | Tutorial completo en HTML (Surge.sh) |
-| [🖥️ walkthrough.html](http://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough.html) | Tutorial completo en HTML (Cloudflare) |
+| [🖥️ walkthrough.html](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) | Tutorial completo en HTML |
 | [📋 PROJECT_INFO.md](PROJECT_INFO.md) | Información técnica del proyecto |
 
 ---
