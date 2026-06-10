@@ -6,7 +6,7 @@
 |------------|-----|
 | 🚀 **Demo Surge.sh** | [thanatos84-hosting-diagnostic-tool.surge.sh](http://thanatos84-hosting-diagnostic-tool.surge.sh/) |
 | ☁️ **Demo Cloudflare Pages** | [thanatos84-hosting-diagnostic-tool.pages.dev](http://thanatos84-hosting-diagnostic-tool.pages.dev/) |
-| 📖 **Tutorial HTML (Surge.sh)** | [walkthrough.html](http://thanatos84-hosting-diagnostic-tool.surge.sh/walkthrough.html) |
+| 📖 **Tutorial HTML** | [walkthrough](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) |
 | 📖 **Tutorial HTML (Cloudflare)** | [walkthrough.html](http://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough.html) |
 | 📦 **Repositorio GitHub** | [github.com/thanatos84/hosting-diagnostic-tool](https://github.com/thanatos84/hosting-diagnostic-tool) |
 
