@@ -122,8 +122,7 @@ Elige la plataforma que prefieras:
 
 | Plataforma | Demo principal | Tutorial HTML |
 |------------|---------------|---------------|
-| 🚀 **Surge.sh** | [thanatos84-hosting-diagnostic-tool.surge.sh](http://thanatos84-hosting-diagnostic-tool.surge.sh/) | [walkthrough.html](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) |
-| ☁️ **Cloudflare Pages** | [thanatos84-hosting-diagnostic-tool.pages.dev](http://thanatos84-hosting-diagnostic-tool.pages.dev/) | [walkthrough.html](http://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough.html) |
+| ☁️ **Cloudflare Pages** | [thanatos84-hosting-diagnostic-tool.pages.dev](http://thanatos84-hosting-diagnostic-tool.pages.dev/) | [walkthrough](https://thanatos84-hosting-diagnostic-tool.pages.dev/walkthrough) |
 
 ### Opción 2: Subir a tu hosting
 
